@@ -1,0 +1,9 @@
+{
+  "YETI_HOME": "%CONFIG_ROOT%/plugins/Yeti4",
+  "XBMLANGPATH": "%YETI_HOME%/icons",
+  "PATH": "%YETI_HOME%/bin",
+  "YETI_TMP": "C:/TEMP",
+  "peregrinel_LICENSE": "5055@localhost",
+  "RLM_LICENSE": "%peregrinel_LICENSE%",
+  "VRAY_FOR_MAYA2020_PLUGINS": "%YETI_HOME%/bin"
+}
