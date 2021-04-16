@@ -1,0 +1,7 @@
+{
+  "KSCH_ROOT": "//Monster4/r/Koschey",
+  "KSCH_PROJECT": "%KSCH_ROOT%/data",
+  "KSCH_CACHE": "%KSCH_ROOT%/cache",
+  "KATANA_ASSETS": "%KSCH_ROOT%/assets/katana",
+  "KATANA_TEXTURES": "%KSCH_ROOT%/assets/textures"
+}

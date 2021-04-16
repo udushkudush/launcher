@@ -89,10 +89,12 @@ class ParseConfig:
         :return:
         """
         # сначала попробуем получить значение переменной в основном конфиге
-        # перменных, и если там нихуя нет, тогда в копии системных перменных,
-        # а если и там нихуя нет то вернуть пустую строку
         _env = self.env.get(env, "")
 
+        if isinstance(val, str) and val.startswith('|'):
+            # если значение строка и начинается со знака |, тогда значение перменной оверайдим
+            self.env[env] = val[1:]
+            return
         val = str(val).split(os.pathsep)
         # print(val)
         if _env:
@@ -121,7 +123,16 @@ class ParseConfig:
         :return:
         """
         print(f"loading config...")
+        key = None
+        if "|" in config:
+            # в имени конфига есть разделитель, после него идет имя ключа который надо забрать
+            config, key = config.split("|")
+
         with open(join(self.config_dir, config), 'r') as c:
+            if key:
+                __ = json.loads(c.read()).get(key)
+                print(f"Key: {key}\n{json.dumps(__, indent=4, separators=(',', ':'))}")
+                return __
             return json.loads(c.read())
 
     def load_main_config(self):

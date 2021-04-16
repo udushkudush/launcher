@@ -1,15 +1,34 @@
 {
-  "MAYA_RENDER_DESC_PATH": "%VRAY_HOME%/maya_root/bin/rendererDesc",
-  "VRAY_FOR_MAYA2020_MAIN": "%VRAY_HOME%/maya_vray",
-  "VRAY_FOR_MAYA2020_PLUGINS": "%VRAY_HOME%/maya_vray/vrayplugins",
-  "VRAY_PLUGINS": "%VRAY_HOME%/maya_vray/vrayplugins",
-  "VRAY_OSL_PATH_MAYA2020": "%VRAY_HOME%/vray/opensl",
-  "PATH": "%VRAY_HOME%/maya_root/bin",
-  "MAYA_PLUG_IN_PATH": "%VRAY_HOME%/maya_vray/plug-ins",
-  "MAYA_SCRIPT_PATH": "%VRAY_HOME%/maya_vray/scripts",
-  "MAYA_PRESET_PATH": "%VRAY_HOME%/maya_vray/presets",
-  "PYTHONPATH":"%VRAY_HOME%/maya_vray/scripts",
-  "XBMLANGPATH": "%VRAY_HOME%/maya_vray/icons",
-  "VRAY_TOOLS_MAYA2020": "%VRAY_HOME%/vray/bin",
-  "VRAY_AUTH_CLIENT_FILE_PATH": "%VRAY_HOME%"
+  "vray_5_maya2020": {
+    "VRAY_HOME": "%CONFIG_ROOT%/plugins/vray",
+    "MAYA_RENDER_DESC_PATH": "%VRAY_HOME%/maya_root/bin/rendererDesc",
+    "VRAY_FOR_MAYA2020_MAIN": "%VRAY_HOME%/maya_vray",
+    "VRAY_FOR_MAYA2020_PLUGINS": "%VRAY_HOME%/maya_vray/vrayplugins",
+    "VRAY_PLUGINS": "%VRAY_HOME%/maya_vray/vrayplugins",
+    "VRAY_OSL_PATH_MAYA2020": "%VRAY_HOME%/vray/opensl",
+    "PATH": "%VRAY_HOME%/maya_root/bin",
+    "MAYA_PLUG_IN_PATH": "%VRAY_HOME%/maya_vray/plug-ins",
+    "MAYA_SCRIPT_PATH": "%VRAY_HOME%/maya_vray/scripts",
+    "MAYA_PRESET_PATH": "%VRAY_HOME%/maya_vray/presets",
+    "PYTHONPATH":"%VRAY_HOME%/maya_vray/scripts",
+    "XBMLANGPATH": "%VRAY_HOME%/maya_vray/icons",
+    "VRAY_TOOLS_MAYA2020": "%VRAY_HOME%/vray/bin",
+    "VRAY_AUTH_CLIENT_FILE_PATH": "%VRAY_HOME%"
+  },
+  "vray_4_maya2019": {
+    "VRAY_HOME": "%CONFIG_ROOT%/plugins/vray",
+    "MAYA_RENDER_DESC_PATH": "%VRAY_HOME%/maya_root/bin/rendererDesc",
+    "VRAY_FOR_MAYA2019_MAIN": "%VRAY_HOME%/maya_vray",
+    "VRAY_FOR_MAYA2019_PLUGINS": "%VRAY_HOME%/maya_vray/vrayplugins",
+    "VRAY_PLUGINS": "%VRAY_HOME%/maya_vray/vrayplugins",
+    "VRAY_OSL_PATH_MAYA2020": "%VRAY_HOME%/vray/opensl",
+    "PATH": "%VRAY_HOME%/maya_root/bin",
+    "MAYA_PLUG_IN_PATH": "%VRAY_HOME%/maya_vray/plug-ins",
+    "MAYA_SCRIPT_PATH": "%VRAY_HOME%/maya_vray/scripts",
+    "MAYA_PRESET_PATH": "%VRAY_HOME%/maya_vray/presets",
+    "PYTHONPATH":"%VRAY_HOME%/maya_vray/scripts",
+    "XBMLANGPATH": "%VRAY_HOME%/maya_vray/icons",
+    "VRAY_TOOLS_MAYA2019": "%VRAY_HOME%/vray/bin",
+    "VRAY_AUTH_CLIENT_FILE_PATH": "%VRAY_HOME%"
+  }
 }

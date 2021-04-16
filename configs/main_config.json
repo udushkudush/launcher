@@ -3,38 +3,21 @@
     "app": "%MAYA_LOCATION%/bin/maya.exe",
     "beauty_name": "Maya 2020 vray 5",
     "MAYA_VER": "2020",
-    "include": ["maya_basis", "vray_5.json", "yeti_4.json"],
-    "VRAY_HOME": "%CONFIG_ROOT%/plugins/vray",
+    "include": ["maya_base", "vray_5.json|vray_5_maya2020", "yeti_4.json|Yeti4_maya2020"],
     "MAYA_LOCATION": "C:/Program Files/Autodesk/Maya%MAYA_VER%",
-    "MAYA_MODULE_PATH": "%CONFIG_ROOT%/modules",
-    "PYTHONPATH": "%CONFIG_ROOT%/python",
-    "MAYA_SHELF_PATH": "%CONFIG_ROOT%/shelves",
     "XBMLANGPATH": "%CONFIG_ROOT%/icons",
-    "MAYA_PLUG_IN_PATH": "%CONFIG_ROOT%/plugins/MayaScanner/Contents/plug-ins",
-    "MAYA_SCRIPT_PATH": "%CONFIG_ROOT%/mel;%CONFIG_ROOT%/mel/selector;%CONFIG_ROOT%/python",
     "PATH": "%MAYA_LOCATION%/bin"
   },
-  "Katana402": {
-    "app": "%KATANA_ROOT%/bin/katanaBin.exe",
-    "beauty_name": "Katana 4.0v2 VrayNext",
-    "KATANA_VER": "4.0v2",
-    "KATANA_ROOT": "c:/Program Files/Katana%KATANA_VER%",
-    "YETI_HOME": "%START_DIR%/katana/yeti",
-    "VRAY_INSTALL_PATH": "%START_DIR%/katana/vray4",
-    "VRAY_FOR_KATANA_PLUGINS_x64": "%VRAY_INSTALL_PATH%/vrayplugins;%YETI_HOME%/bin",
-    "PATH": "%VRAY_INSTALL_PATH%/RenderBin;%YETI_HOME%/bin",
-    "KATANA_RESOURCES": "%VRAY_INSTALL_PATH%;3Delight/3DelightForKatana"
-  },
-  "Maya2019": {
-     "app": "%MAYA_LOCATION%/bin/maya.exe",
-   "MAYA_VER": "2019",
-    "include": ["maya_basis"],
+    "Maya2019": {
+    "app": "%MAYA_LOCATION%/bin/maya.exe",
+    "MAYA_VER": "2019",
+    "include": ["maya_base", "maya_scanner", "selector",
+      "vray_5.json|vray_4_maya2019",
+      "yeti_4.json|Yeti_371_maya2019"],
     "MAYA_LOCATION": "C:/Program Files/Autodesk/Maya%MAYA_VER%",
-    "MAYA_MODULE_PATH": "%PIPELINE_ROOT%/maya/%MAYA_VER%/modules",
-    "PYTHONPATH": "%PIPELINE_ROOT%/maya/%MAYA_VER%/python;%PIPELINE_ROOT%/maya/scripts",
     "PATH": "%MAYA_LOCATION%/bin"
   },
-  "maya_basis": {
+  "maya_base": {
     "comment": "основная конфигурация для Maya",
     "MAYA_DISABLE_OPENCL": 1,
     "MAYA_FORCE_PANEL_FOCUS": 0,
@@ -42,7 +25,41 @@
     "MAYA_SKIP_BLOCK_CHECK": 1,
     "MAYA_DISABLE_PLUGIN_SCENE_MODIFIED_WARNING": 1,
     "CONFIG_ROOT": "%PIPELINE_ROOT%/maya/%MAYA_VER%",
-    "START_DIR": "%PIPELINE_ROOT%"
+    "START_DIR": "%PIPELINE_ROOT%",
+    "MAYA_SHELF_PATH": "%CONFIG_ROOT%/shelves",
+    "MAYA_MODULE_PATH": "%CONFIG_ROOT%/modules",
+    "MAYA_SCRIPT_PATH": "%CONFIG_ROOT%/mel;%CONFIG_ROOT%/python",
+    "PYTHONPATH": "%CONFIG_ROOT%/python;%PIPELINE_ROOT%/maya/scripts"
+  },
+  "maya_scanner": {
+    "MAYA_PLUG_IN_PATH": "%CONFIG_ROOT%/plugins/MayaScanner/Contents/plug-ins"
+  },
+  "selector": {
+    "MAYA_SCRIPT_PATH": "%CONFIG_ROOT%/mel/selector"
+  },
+  "umka_old": {
+
+  },
+  "Katana402": {
+    "app": "%KATANA_ROOT%/bin/katanaBin.exe",
+    "beauty_name": "Katana 4.0v2 VrayNext",
+    "KATANA_VER": "4.0v2",
+    "include": ["katana_base"]
+  },
+  "Katana403": {
+    "app": "%KATANA_ROOT%/bin/katanaBin.exe",
+    "beauty_name": "Katana 4.0v3 VrayNext",
+    "KATANA_VER": "4.0v3",
+    "include": ["katana_base"]
+  },
+  "katana_base": {
+    "KATANA_ROOT": "c:/Program Files/Katana%KATANA_VER%",
+    "YETI_HOME": "%PIPELINE_ROOT%/katana/yeti",
+    "VRAY_INSTALL_PATH": "%PIPELINE_ROOT%/katana/vray4",
+    "VRAY_FOR_KATANA_PLUGINS_x64": "%VRAY_INSTALL_PATH%/vrayplugins;%YETI_HOME%/bin",
+    "PATH": "%KATANA_ROOT%/bin;%VRAY_INSTALL_PATH%/RenderBin;%YETI_HOME%/bin",
+    "KATANA_RESOURCES": "%VRAY_INSTALL_PATH%",
+    "DEFAULT_RENDERER": "|vray"
   }
 }
 
