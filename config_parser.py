@@ -122,7 +122,7 @@ class ParseConfig:
         :param config:
         :return:
         """
-        print(f"loading config...")
+        # print(f"loading config...")
         key = None
         if "|" in config:
             # в имени конфига есть разделитель, после него идет имя ключа который надо забрать
@@ -131,7 +131,7 @@ class ParseConfig:
         with open(join(self.config_dir, config), 'r') as c:
             if key:
                 __ = json.loads(c.read()).get(key)
-                print(f"Key: {key}\n{json.dumps(__, indent=4, separators=(',', ':'))}")
+                # print(f"Key: {key}\n{json.dumps(__, indent=4, separators=(',', ':'))}")
                 return __
             return json.loads(c.read())
 

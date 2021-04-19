@@ -29,13 +29,30 @@ class MainLauncher(QtWidgets.QMainWindow):
         super(MainLauncher, self).__init__(parent)
         log.info('Start init')
         self.cw = QtWidgets.QWidget(self)
+        self.leftFrame = QtWidgets.QFrame(self.cw)
+        self.leftFrame.setMinimumWidth(18)
+        self.leftFrame.setStyleSheet("background-color: rgb(75, 45, 45)")
+        self.centralFrame = QtWidgets.QFrame(self.cw)
+        self.centralFrame.setStyleSheet("background-color: rgb(170, 170, 170)")
         self.setCentralWidget(self.cw)
         self.setMinimumWidth(175)
-        self.current_project = 'Character TD'
-        self.ml = QtWidgets.QVBoxLayout(self.cw)
+        main_layout = QtWidgets.QGridLayout(self.cw)
+        main_layout.setContentsMargins(2, 2, 2, 2)
+        main_layout.setHorizontalSpacing(0)
+        main_layout.addWidget(self.leftFrame, 0, 0, 2, 1)
+        main_layout.addWidget(self.centralFrame, 0, 1, 2, 1)
+        main_layout.setColumnMinimumWidth(0, 18)
+        main_layout.setColumnStretch(0, 2)
+        main_layout.setColumnStretch(1, 12)
+
+        # self.current_project = 'Character TD'
+
+        self.ml = QtWidgets.QVBoxLayout(self.centralFrame)
+        self.ml.setContentsMargins(2, 2, 2, 2)
+        self.ml.setSpacing(2)
         self.config_parser = config_parser.ParseConfig()
         self._config = None
-        self.x = None
+
         self.buttons = []
         self.create_app_buttons()
 
@@ -72,8 +89,7 @@ class MainLauncher(QtWidgets.QMainWindow):
         cfg = self.prepare_config(self._config.get(sender))
         # теперь получим приложение для запуска
         application = cfg.pop('app')
-        # print(application)
-        # print(json.dumps(cfg, indent=4, separators=(',', ':')))
+        print(json.dumps(cfg, indent=4, separators=(',', ':')))
         subprocess.Popen([application], env=cfg)
 
     def prepare_config(self, i):
@@ -100,8 +116,8 @@ class MainLauncher(QtWidgets.QMainWindow):
                 # если нет ключа app то кнопочку не генерим
                 continue
             text = self._config[item].get('beauty_name', item)
-            wdg = QtWidgets.QPushButton(self, text=text)
-            # wdg = BtnApp(self, text)
+            # wdg = QtWidgets.QPushButton(self, text=text)
+            wdg = BtnApp(self, text)
             wdg.setObjectName(item)
             wdg.clicked.connect(self.launch_app)
             self.ml.addWidget(wdg)
@@ -127,21 +143,17 @@ class BtnApp(QtWidgets.QPushButton):
         super(BtnApp, self).__init__(parent)
         self.name = name
         self.setMinimumHeight(34)
-        mouse_hover = self.mouseMoveEvent
         self.setMouseTracking(True)
+        self.is_hover = False
+        # mouse_hover = self.mouseMoveEvent
 
-        def redraw(event):
-            # if event.type():
-            # painter = QtGui.QPainter(self)
-            # painter.fillRect(
-            #     0, 0, painter.device().width(), painter.device().height(),
-            #     QtGui.QColor(128, 140, 150, 200)
-            # )
-            mouse_hover(event)
-            print(event.type())
-            # self.paintEvent(event)
-
-        self.mouseMoveEvent = redraw
+        # def redraw(event):
+        #     mouse_hover(event)
+        #     # print(event.type())
+        #     # self.paintEvent(event)
+        #     self.repaint()
+        #
+        # self.mouseMoveEvent = redraw
 
     def get_icon(self):
         """
@@ -150,29 +162,42 @@ class BtnApp(QtWidgets.QPushButton):
         """
         pass
 
-    def paintEvent(self, e):
+    def paintEvent(self, event):
+        # option = QtWidgets.QStyleOptionButton()
+        # option.initFrom(self)
         painter = QtGui.QPainter(self)
-        brush = QtGui.QBrush()
-        rect = QtCore.QRect(0, 0, painter.device().width(), painter.device().height())
+        painter.setRenderHint(QtGui.QPainter.Antialiasing)
 
-        color = QtGui.QColor(145, 155, 165, 105)
-        if e.type() == QtCore.QEvent.Type.MouseMove:
-            color = QtGui.QColor(128, 140, 150, 200)
-            # print("mouse move")
-        else:
-            color = QtGui.QColor(150, 150, 155, 190)
-        #     print('Painting')
+        rect = QtCore.QRect(0, 0, painter.device().width(), painter.device().height())
+        font = QtGui.QFont("Segoe UI", 9, 300)
+        painter.setFont(font)
+        color = QtGui.QColor(120, 150, 120, 150)
+        if self.underMouse():
+            color = QtGui.QColor(155, 120, 100, 185)
+
+        # if option.state & QtWidgets.QStyle.State_MouseOver:
+        #     if option.state & QtWidgets.QStyle.State:
+        #         color = QtGui.QColor(155, 120, 130, 150)
+        #         print(f"clicked {self.name}")
+        #     else:
+        #         color = QtGui.QColor(128, 140, 150, 200)
+        #         print(f"hover {self.name}")
+
+        brush = QtGui.QBrush()
         brush.setColor(color)
         brush.setStyle(QtCore.Qt.SolidPattern)
-        painter.fillRect(rect, brush)
+        pen = QtGui.QPen(QtCore.Qt.NoPen)
+        painter.setPen(pen)
+        painter.setBrush(brush)
+        painter.drawRoundedRect(rect, 5, 5)
         painter.setBrush(QtGui.QBrush(QtCore.Qt.NoBrush))
         painter.setPen(QtGui.QPen(QtGui.QColor(85, 45, 45, 255)))
-
 
         painter.drawText(
             QtCore.QPoint(38, 20),
             self.name
         )
+        painter.end()
 
 
 if __name__ == '__main__':
