@@ -21,7 +21,7 @@ log_file = join(dirname(__file__), 'launcher.log')
 el_logger = jw_logger.ElLogger('launcher_logger', log_file)
 log = el_logger.log
 
-os.environ['PIPELINE_ROOT'] = "C:/tools"
+# os.environ['PIPELINE_ROOT'] = "C:/tools"
 
 
 class MainLauncher(QtWidgets.QMainWindow):
@@ -116,10 +116,18 @@ class MainLauncher(QtWidgets.QMainWindow):
                 # если нет ключа app то кнопочку не генерим
                 continue
             text = self._config[item].get('beauty_name', item)
-            # wdg = QtWidgets.QPushButton(self, text=text)
-            wdg = BtnApp(self, text)
+            wdg = QtWidgets.QPushButton(self, text=text)
+            # wdg = BtnApp(self, text)
             wdg.setObjectName(item)
             wdg.clicked.connect(self.launch_app)
+            wdg.setStyleSheet("""
+QPushButton{
+height: 32px; 
+border-radius: 4px;
+background-color: rgb(45, 45, 45);
+color: rgb(120,120,120)}
+QPushButton:hover{background-color: rgb(55, 55, 55); border: 1px solid rgb(85, 70, 70)}
+""")
             self.ml.addWidget(wdg)
             self.buttons.append(wdg)
 
@@ -131,9 +139,10 @@ class MainLauncher(QtWidgets.QMainWindow):
             self.show()
 
     def set_position(self, i):
+
         pos = QtCore.QRect(
-            QtCore.QPoint(i.width() - 250, i.height() - 200),
-            QtCore.QSize(180, 140)
+            QtCore.QPoint(i.width() - 210, i.height() - 165),
+            QtCore.QSize(185, 150)
         )
         self.setGeometry(pos)
 

@@ -3,18 +3,20 @@
     "app": "%MAYA_LOCATION%/bin/maya.exe",
     "beauty_name": "Maya 2020 vray 5",
     "MAYA_VER": "2020",
-    "include": ["maya_base", "vray_5.json|vray_5_maya2020", "yeti_4.json|Yeti4_maya2020"],
+    "include": ["maya_base", "vray.json|vray_5_maya2020", "yeti.json|Yeti_4_maya2020"],
     "MAYA_LOCATION": "C:/Program Files/Autodesk/Maya%MAYA_VER%",
     "XBMLANGPATH": "%CONFIG_ROOT%/icons",
     "PATH": "%MAYA_LOCATION%/bin"
   },
     "Maya2019": {
     "app": "%MAYA_LOCATION%/bin/maya.exe",
+    "beauty_name": "Maya 2019 vray Next",
     "MAYA_VER": "2019",
-    "include": ["maya_base", "maya_scanner", "selector",
-      "vray_5.json|vray_4_maya2019",
-      "yeti_4.json|Yeti_371_maya2019"],
+    "include": ["maya_base", "maya_scanner", "selector", "prj_koschey.json",
+      "vray.json|vray_4_maya2019",
+      "yeti.json|Yeti_371_maya2019"],
     "MAYA_LOCATION": "C:/Program Files/Autodesk/Maya%MAYA_VER%",
+    "MAYA_PLUG_IN_PATH": "%CONFIG_ROOT%/plugins/KschBlast",
     "PATH": "%MAYA_LOCATION%/bin"
   },
   "maya_base": {
@@ -38,7 +40,7 @@
     "MAYA_SCRIPT_PATH": "%CONFIG_ROOT%/mel/selector"
   },
   "umka_old": {
-
+    "comment": "Empty"
   },
   "Katana402": {
     "app": "%KATANA_ROOT%/bin/katanaBin.exe",

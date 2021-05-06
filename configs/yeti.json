@@ -1,5 +1,5 @@
 {
-  "Yeti4_maya2020": {
+  "Yeti_4_maya2020": {
     "YETI_HOME": "%CONFIG_ROOT%/plugins/Yeti4",
     "XBMLANGPATH": "%YETI_HOME%/icons",
     "PATH": "%YETI_HOME%/bin",
