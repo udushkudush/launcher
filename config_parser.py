@@ -61,6 +61,26 @@ class ParseConfig:
             # остальное добавляем в переменную
             self.inject_env(k, v)
 
+    def parse_new(self, conf):
+        self.env = os.environ.copy()
+        for i in conf.get('include'):
+            val = self.main_config.get(i)
+            if val:
+                for k, v in val.items():
+                    if k.islower():
+                        continue
+                    self.inject_env(k, v)
+            else:
+                val = self.get_file_config(i)
+                [self.inject_env(k, v) for k, v in val.items()]
+
+        for k, v in conf.items():
+            if k.islower():
+                if not isinstance(v, str):
+                    continue
+                v = self.resolve_variable(v)
+            self.inject_env(k, v)
+
     def resolve_variable(self, var):
         # ищем по синтаксису перменную
         res = self.get_env(var)
@@ -113,7 +133,7 @@ class ParseConfig:
         # удаляем повторы, и собираем в строку
         _env = os.pathsep.join(sorted(list(set(__))))
 
-        # втавляем обновленное значение перменной в наш основной конфиг
+        # вставляем обновленное значение перменной в наш основной конфиг
         self.env[env] = _env
 
     def get_file_config(self, config):
@@ -144,6 +164,6 @@ if __name__ == '__main__':
 
     MC = ParseConfig()
     m_cfg = MC.main_config['Maya2020']
-    MC.parse_config(m_cfg)
+    MC.parse_new(m_cfg)
     print(json.dumps(MC.env, indent=4, separators=(',', ':')))
 

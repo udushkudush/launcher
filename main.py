@@ -29,6 +29,7 @@ class MainLauncher(QtWidgets.QMainWindow):
         super(MainLauncher, self).__init__(parent)
         log.info('Start init')
         self.cw = QtWidgets.QWidget(self)
+        self.cw.setStyleSheet("QWidget{border-radius: 4px}")
         self.leftFrame = QtWidgets.QFrame(self.cw)
         self.leftFrame.setMinimumWidth(18)
         self.leftFrame.setStyleSheet("background-color: rgb(75, 45, 45)")
@@ -36,6 +37,9 @@ class MainLauncher(QtWidgets.QMainWindow):
         self.centralFrame.setStyleSheet("background-color: rgb(170, 170, 170)")
         self.setCentralWidget(self.cw)
         self.setMinimumWidth(175)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
+        # self.set
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         main_layout = QtWidgets.QGridLayout(self.cw)
         main_layout.setContentsMargins(2, 2, 2, 2)
         main_layout.setHorizontalSpacing(0)
@@ -46,6 +50,7 @@ class MainLauncher(QtWidgets.QMainWindow):
         main_layout.setColumnStretch(1, 12)
 
         # self.current_project = 'Character TD'
+        self.setMouseTracking(True)
 
         self.ml = QtWidgets.QVBoxLayout(self.centralFrame)
         self.ml.setContentsMargins(2, 2, 2, 2)
@@ -79,7 +84,12 @@ class MainLauncher(QtWidgets.QMainWindow):
             self.tray = None
         print(f"Pipilene root: {os.getenv('PIPELINE_ROOT')}")
         self.set_position(_screen)
-        self.show()
+        # self.show()
+
+    def tray_show_hide(self, reason):
+        if reason == QtWidgets.QSystemTrayIcon.ActivationReason.Trigger:
+            print('Left click')
+            self.show_hide()
 
     def launch_app(self):
         sender = self.sender().objectName()
@@ -91,6 +101,7 @@ class MainLauncher(QtWidgets.QMainWindow):
         application = cfg.pop('app')
         print(json.dumps(cfg, indent=4, separators=(',', ':')))
         subprocess.Popen([application], env=cfg)
+        self.hide()
 
     def prepare_config(self, i):
         """Парсит env для приложения"""
@@ -131,7 +142,9 @@ QPushButton:hover{background-color: rgb(55, 55, 55); border: 1px solid rgb(85, 7
             self.ml.addWidget(wdg)
             self.buttons.append(wdg)
 
-    def show_hide(self):
+    def show_hide(self, reason=None):
+        if reason == QtWidgets.QSystemTrayIcon.ActivationReason.Context:
+            return
         log.info('Shit')
         if self.isVisible():
             self.hide()
@@ -139,10 +152,10 @@ QPushButton:hover{background-color: rgb(55, 55, 55); border: 1px solid rgb(85, 7
             self.show()
 
     def set_position(self, i):
-
+        size = (190, 250)
         pos = QtCore.QRect(
-            QtCore.QPoint(i.width() - 210, i.height() - 165),
-            QtCore.QSize(185, 150)
+            QtCore.QPoint(i.width() - size[0], i.height() - size[1]),
+            QtCore.QSize(*size)
         )
         self.setGeometry(pos)
 
