@@ -6,7 +6,9 @@
     "YETI_TMP": "C:/TEMP",
     "peregrinel_LICENSE": "5055@localhost",
     "RLM_LICENSE": "%peregrinel_LICENSE%",
-    "VRAY_FOR_MAYA2020_PLUGINS": "%YETI_HOME%/bin"
+    "VRAY_FOR_MAYA2020_PLUGINS": "%YETI_HOME%/bin",
+    "MTOA_EXTENSIONS_PATH": "%YETI_HOME%/plug-ins",
+    "ARNOLD_PLUGIN_PATH": "%YETI_HOME%/bin"
   },
   "Yeti_371_maya2019": {
     "YETI_HOME": "%CONFIG_ROOT%/plugins/Yeti",
